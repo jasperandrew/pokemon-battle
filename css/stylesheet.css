@@ -1,0 +1,166 @@
+@font-face {
+	font-family: PowerClear;
+	src: url("http://www.jasperandrew.com/work/pokemon-battle/pkmndp.ttf");
+}
+
+html, body {
+	padding: 0;
+	margin: 0;
+	background-color: #f5f5f5;
+	width: 100%;
+	height: 100%;
+	font-family: PowerClear;
+	text-shadow: 1px 1px 0 rgba(0, 0, 0, .3);
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+#player, #player-name, #player-health-bar, #player-info, #player-lvl,
+#enemy, #enemy-name, #enemy-health-bar, #enemy-info, #enemy-lvl,
+#attack, #text-box, #action-text, .move-button, .move-text, #game-over {
+	position: absolute;
+}
+
+#player-name, #player-lvl,
+#enemy-name, #enemy-lvl,
+#text-box {
+	font-size: 12px;
+}
+
+#main-container {
+	width: 256px;
+	height: 393px;
+	border: 6px solid black;
+	box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.37);
+	border-radius: 3px;
+}
+
+#top-screen {
+	height: 190px;
+}
+
+#top-screen img {
+	display: block;
+}
+
+#player {
+	bottom: 235px;
+	left: 38px;
+}
+
+#player-info {
+	top: 98px;
+	right: 0;
+}
+
+#player-health-bar {
+	width: 48px;
+	top: 118px;
+	right: 10px;
+}
+
+#player-health {
+	width: 100%;
+	background-image: url("../img/hbar-good.png");
+	height: 4px;
+}
+
+#player-name {
+	top: 101px;
+	left: 151px;
+}
+
+#player-lvl {
+	top: 101px;
+	left: 225px;
+}
+
+#enemy {
+	top: 47px;
+	right: 48px;
+}
+
+#enemy-info {
+	top: 22px;
+	left: 0;
+}
+
+#enemy-health-bar {
+	width: 48px;
+	top: 42px;
+	left: 50px;
+}
+
+#enemy-health {
+	width: 100%;
+	background-image: url("../img/hbar-good.png");
+	height: 4px;
+}
+
+#enemy-name {
+	top: 25px;
+	left: 4px;
+}
+
+#enemy-lvl {
+	top: 25px;
+	left: 75px;
+}
+
+.enemy-attack {
+	bottom: 237px;
+	left: 34px;
+}
+
+.player-attack {
+	top: 56px;
+	right: 30px;
+}
+
+#text-box {
+	z-index: 1;
+}
+
+#action-text {
+	width: 222px;
+	top: 11px;
+	left: 13px;
+}
+
+.move-button {
+	display: block;
+	height: 54px;
+	cursor: pointer;
+}
+
+.move-text {
+	width: 98px;
+	top: 21px;
+	left: 13px;
+	font-size: 14px;
+	text-align: center;
+}
+
+#game-over {
+	font-size: 25px;
+	bottom: 15px;
+	width: 256px;
+	text-align: center;
+	color: red;
+}
+
+/*---- Utility Classes ----*/
+.bullseye {
+	margin: auto !important;
+	position: absolute !important;
+	top: 0 !important;
+	bottom: 0 !important;
+	left: 0 !important;
+	right: 0 !important;
+}
+
+.hide {
+	display: none !important;
+}
