@@ -1,32 +1,61 @@
 var currentState;
-var enemyPkmn;
+var cpuPkmn;
 var playerPkmn;
+
+function attack(user, move) {
+  console.log(user + " attacked with " + move.name + " (" + move.class + ")");
+
+  var userPkmn, targetPkmn, target, nextTurn;
+  if(user == "player"){
+    userPkmn = playerPkmn;
+    targetPkmn = cpuPkmn;
+    target = "cpu";
+    nextTurn = cpuTurn;
+  }else{
+    userPkmn = cpuPkmn;
+    targetPkmn = playerPkmn;
+    target = "player";
+    nextTurn = playerTurn;
+  }
+
+  $("#attack").addClass("hide");
+  $("#attack").removeClass(user + "-attack");
+
+  if(move.class == "phys" || move.class == "spec"){
+    if(!userPkmn.effect){
+      targetPkmn.health -= move.pwr;
+    }else{
+      targetPkmn.health -= move.pwr - (move.pwr * targetPkmn.effect);
+      targetPkmn.effect = null;
+    }
+    $("#" + target + "-health").animate({
+      width: (targetPkmn.health/targetPkmn.max_health)*100 + "%",
+    }, 200);
+    currentState = nextTurn;
+    loop();
+  }else{
+    targetPkmn.effect = move.pwr;
+    currentState = nextTurn;
+    loop();
+  }
+}
+
 
 var playerTurn = {
   play: function(){
     var move;
-    function setupUserField() {
-      var moveButtons = ["#move-1 .move-text", "#move-2 .move-text", "#move-3 .move-text", "#move-4 .move-text"];
-
-      $("#player-buttons").removeClass("hide");
-      $("#action-text").text("What will " + playerPkmn.name + " do?");
-
-      for(var i = 0; i < 4; i++){
-        $(moveButtons[i]).text(moveList[playerPkmn.moves[i]].name);
-      }
-    };
 
     function prepAttack() {
       $("#player-buttons").addClass("hide");
       $("#player").animate({
-        top: "+=10px",
-      }, 200, function(){
+        left: "+=10px",
+      }, 100, function(){
         $("#player").animate({
-          top: "-=10px",
-        }, 200)
+          left: "-=10px",
+        }, 100)
       })
       getAccuracy();
-    };
+    }
 
     function getAccuracy() {
       var accuracy = Math.random();
@@ -34,75 +63,54 @@ var playerTurn = {
         $("#action-text").text(move.name + " hit!");
         getMoveClass();
       }else{
+        console.log("player missed with " + move.name + " (" + move.class + ")");
         $("#action-text").text(move.name + " missed!");
-        currentState = enemyTurn;
+        currentState = cpuTurn;
         setTimeout(loop, 1500);
       }
-    };
+    }
 
     function getMoveClass() {
       animateMove();
-      if(move.class == "phys" || move.class == "spec"){
-        setTimeout(attack, 1500);
-      }else{
-        setTimeout(defend, 1500);
-      }
-    };
+      setTimeout(attack, 1500, "player", move);
+    }
 
     function animateMove() {
       $("#attack").addClass("player-attack");
       $("#attack").removeClass("hide");
       $("#attack").fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100);
-    };
-
-    function attack() {
-      $("#attack").addClass("hide");
-      $("#attack").removeClass("player-attack");
-      if(!playerPkmn.effect){
-        enemyPkmn.health -= move.pwr;
-      }else{
-        enemyPkmn.health -= move.pwr - (move.pwr * enemyPkmn.effect);
-        enemyPkmn.effect = null;
-      }
-      $("#enemy-health").animate({
-        width: (enemyPkmn.health/enemyPkmn.max_health)*100 + "%",
-      }, 200);
-      currentState = enemyTurn;
-      loop();
-    };
-
-    function defend() {
-      $("#attack").addClass("hide");
-      $("#attack").removeClass("player-attack");
-      enemyPkmn.effect = move.pwr;
-      currentState = enemyTurn;
-      loop();
-    };
+    }
 
     $(".move-button").unbind().click(function(){
       move = moveList[playerPkmn.moves[$(this).attr("value")]];
       prepAttack();
     });
 
-    setupUserField();
+    // Set up user buttons //
+    var moveButtons = ["#move-1 .move-text", "#move-2 .move-text", "#move-3 .move-text", "#move-4 .move-text"];
+    $("#player-buttons").removeClass("hide");
+    $("#action-text").text("What will " + playerPkmn.name + " do?");
+    for(var i = 0; i < 4; i++){
+      $(moveButtons[i]).text(moveList[playerPkmn.moves[i]].name);
+    }
   }
 };
 
-var enemyTurn = {
+var cpuTurn = {
   play: function(){
-    var move = moveList[enemyPkmn.moves[Math.floor(Math.random() * 4)]];
-    $("#action-text").text("Enemy " + enemyPkmn.name + " used " + move.name + "!");
+    var move = moveList[cpuPkmn.moves[Math.floor(Math.random() * 4)]];
+    $("#action-text").text("Enemy " + cpuPkmn.name + " used " + move.name + "!");
 
     function prepAttack() {
-      $("#enemy").animate({
-        top: "+=10px",
-      }, 200, function(){
-        $("#enemy").animate({
-          top: "-=10px",
-        }, 200)
+      $("#cpu").animate({
+        right: "+=10px",
+      }, 100, function(){
+        $("#cpu").animate({
+          right: "-=10px",
+        }, 100)
       })
       getAccuracy();
-    };
+    }
 
     function getAccuracy() {
       var accuracy = Math.random();
@@ -110,57 +118,30 @@ var enemyTurn = {
         $("#action-text").text(move.name + " hit!");
         getMoveClass();
       }else{
+        console.log("cpu missed with " + move.name + " (" + move.class + ")");
         $("#action-text").text(move.name + " missed!");
         currentState = playerTurn;
         setTimeout(loop, 1500);
       }
-    };
+    }
 
     function getMoveClass() {
       animateMove();
-      if(move.class == "phys" || move.class == "spec"){
-        setTimeout(attack, 1500);
-      }else{
-        setTimeout(defend, 1500);
-      }
-    };
+      setTimeout(attack, 1500, "cpu", move);
+    }
 
     function animateMove() {
-      $("#attack").addClass("enemy-attack");
+      $("#attack").addClass("cpu-attack");
       $("#attack").removeClass("hide");
       $("#attack").fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100);
-    };
-
-    function attack() {
-      $("#attack").addClass("hide");
-      $("#attack").removeClass("enemy-attack");
-      if(!enemyPkmn.effect){
-        playerPkmn.health -= move.pwr;
-      }else{
-        playerPkmn.health -= move.pwr - (move.pwr * playerPkmn.effect);
-        playerPkmn.effect = null;
-      }
-      $("#player-health").animate({
-        width: (playerPkmn.health/playerPkmn.max_health)*100 + "%",
-      }, 200);
-      currentState = playerTurn;
-      loop();
-    };
-
-    function defend() {
-      $("#attack").addClass("hide");
-      $("#attack").removeClass("enemy-attack");
-      playerPkmn.effect = move.pwr;
-      currentState = playerTurn;
-      loop();
-    };
+    }
 
     setTimeout(prepAttack, 1500);
   }
 };
 
 function loop() {
-  if(playerPkmn.health <= 0 || enemyPkmn.health <= 0){
+  if(playerPkmn.health <= 0 || cpuPkmn.health <= 0){
     $("#game-over").removeClass("hide");
     console.log("GAME OVER");
   }else{
@@ -170,14 +151,14 @@ function loop() {
 
 function init() {
   playerPkmn = charmander;
-  enemyPkmn = pikachu;
+  cpuPkmn = pikachu;
 
   $("#player-name").text(playerPkmn.name);
   $("#player-lvl").text("lv" + playerPkmn.lvl);
   $("#player-health").css("width", (playerPkmn.health/playerPkmn.max_health)*100 + "%");
-  $("#enemy-name").text(enemyPkmn.name);
-  $("#enemy-lvl").text("lv" + enemyPkmn.lvl);
-  $("#enemy-health").css("width", (enemyPkmn.health/enemyPkmn.max_health)*100 + "%");
+  $("#cpu-name").text(cpuPkmn.name);
+  $("#cpu-lvl").text("lv" + cpuPkmn.lvl);
+  $("#cpu-health").css("width", (cpuPkmn.health/cpuPkmn.max_health)*100 + "%");
 
   currentState = playerTurn;
   loop();

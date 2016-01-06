@@ -10,7 +10,7 @@ html, body {
 	width: 100%;
 	height: 100%;
 	font-family: PowerClear;
-	text-shadow: 1px 1px 0 rgba(0, 0, 0, .3);
+	text-shadow: 1px 1px 0 rgba(0, 0, 0, .25);
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
@@ -19,13 +19,13 @@ html, body {
 }
 
 #player, #player-name, #player-health-bar, #player-info, #player-lvl,
-#enemy, #enemy-name, #enemy-health-bar, #enemy-info, #enemy-lvl,
+#cpu, #cpu-name, #cpu-health-bar, #cpu-info, #cpu-lvl,
 #attack, #text-box, #action-text, .move-button, .move-text, #game-over {
 	position: absolute;
 }
 
 #player-name, #player-lvl,
-#enemy-name, #enemy-lvl,
+#cpu-name, #cpu-lvl,
 #text-box {
 	font-size: 12px;
 }
@@ -78,39 +78,39 @@ html, body {
 	left: 225px;
 }
 
-#enemy {
+#cpu {
 	top: 47px;
 	right: 48px;
 }
 
-#enemy-info {
+#cpu-info {
 	top: 22px;
 	left: 0;
 }
 
-#enemy-health-bar {
+#cpu-health-bar {
 	width: 48px;
 	top: 42px;
 	left: 50px;
 }
 
-#enemy-health {
+#cpu-health {
 	width: 100%;
 	background-image: url("../img/hbar-good.png");
 	height: 4px;
 }
 
-#enemy-name {
+#cpu-name {
 	top: 25px;
 	left: 4px;
 }
 
-#enemy-lvl {
+#cpu-lvl {
 	top: 25px;
 	left: 75px;
 }
 
-.enemy-attack {
+.cpu-attack {
 	bottom: 237px;
 	left: 34px;
 }
