@@ -64,7 +64,6 @@ html, body {
 
 #player-health {
 	width: 100%;
-	background-image: url("../img/hbar-good.png");
 	height: 4px;
 }
 
@@ -96,7 +95,6 @@ html, body {
 
 #cpu-health {
 	width: 100%;
-	background-image: url("../img/hbar-good.png");
 	height: 4px;
 }
 
@@ -108,6 +106,18 @@ html, body {
 #cpu-lvl {
 	top: 25px;
 	left: 75px;
+}
+
+.hbar-good {
+	background-image: url("../img/hbar-good.png");
+}
+
+.hbar-mid {
+	background-image: url("../img/hbar-mid.png");
+}
+
+.hbar-bad {
+	background-image: url("../img/hbar-bad.png");
 }
 
 .cpu-attack {

@@ -39,6 +39,20 @@ function attack(move) {
       $("#" + targetTxt + "-health").animate({
         width: (target.health/target.max_health)*100 + "%",
       }, 200);
+
+      var hbar = document.getElementById(targetTxt + "-health");
+      if(target.health <= target.max_health/4){
+        hbar.classList.remove("hbar-mid");
+        hbar.classList.add("hbar-bad");
+      }else if(target.health <= target.max_health/2){
+        hbar.classList.remove("hbar-good");
+        hbar.classList.remove("hbar-bad");
+        hbar.classList.add("hbar-mid");
+      }else{
+        hbar.classList.remove("hbar-mid");
+        hbar.classList.add("hbar-good");
+      }
+
       currentState = nextTurn;
       loop();
     }else{
