@@ -10,7 +10,7 @@ var charmander = {
  var pikachu = {
    name: "PIKACHU",
    max_health: 100,
-   health: 70,
+   health: 100,
    lvl: 1,
    effect: null,
    moves: ["thundershock", "tackle", "tail_whip", "growl"]

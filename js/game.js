@@ -1,11 +1,8 @@
-var currentState;
-var cpuPkmn;
-var playerPkmn;
-
+var currentState, cpuPkmn, playerPkmn;
 var attacker, attackerTxt, target, targetTxt, nextTurn;
 
+// GLOBAL ATTACK FUNCTION //
 function attack(move) {
-
   function animateAttack() {
     // Run the correct player animation //
     if(attackerTxt == "player"){
@@ -65,7 +62,7 @@ function attack(move) {
   }
 }
 
-
+// PLAYER TURN OBJECT //
 var playerTurn = {
   play: function(){
     // Set the stuff //
@@ -94,6 +91,7 @@ var playerTurn = {
   }
 };
 
+// CPU TURN OBJECT //
 var cpuTurn = {
   play: function(){
     // Set the stuff //
@@ -110,6 +108,7 @@ var cpuTurn = {
   }
 };
 
+// GAME LOOP CHECKER FUNCTION //
 function loop() {
   if(playerPkmn.health <= 0 || cpuPkmn.health <= 0){
     $("#game-over").removeClass("hide");
@@ -119,6 +118,7 @@ function loop() {
   }
 }
 
+// INITIALIZATION FUNCTION //
 function init() {
   playerPkmn = charmander;
   cpuPkmn = pikachu;
