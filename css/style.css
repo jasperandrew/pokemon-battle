@@ -1,6 +1,6 @@
 @font-face {
 	font-family: PowerClear;
-	src: url("http://www.jasperandrew.com/work/pokemon-battle/pkmndp.ttf");
+	src: url("../pkmndp.ttf");
 }
 
 html, body {
@@ -18,6 +18,10 @@ html, body {
 	cursor: default;
 }
 
+#top-screen, #bottom-screen {
+	position: relative;
+}
+
 #player, #player-name, #player-health-bar, #player-info, #player-lvl,
 #cpu, #cpu-name, #cpu-health-bar, #cpu-info, #cpu-lvl,
 #attack, #text-box, #action-text, .move-button, .move-text, #game-over {
@@ -31,15 +35,27 @@ html, body {
 }
 
 #main-container {
-	width: 256px;
-	height: 393px;
-	border: 6px solid black;
-	box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.37);
-	border-radius: 3px;
+	width: 550px;
+	height: 570px;
+	background-image: url("../img/ds-lite.png");
 }
 
 #top-screen {
+	top: 40px;
+	margin: 0 auto;
 	height: 190px;
+	width: 256px;
+	border: 2px solid #292929;
+	border-radius: 2px;
+}
+
+#bottom-screen {
+	top: 138px;
+	margin: 0 auto;
+	height: 190px;
+	width: 256px;
+	border: 2px solid #292929;
+	border-radius: 2px;
 }
 
 #top-screen img {
@@ -47,7 +63,7 @@ html, body {
 }
 
 #player {
-	bottom: 235px;
+	bottom: 46px;
 	left: 38px;
 }
 
@@ -121,7 +137,7 @@ html, body {
 }
 
 .cpu-attack {
-	bottom: 237px;
+	bottom: 46px;
 	left: 34px;
 }
 
@@ -136,7 +152,7 @@ html, body {
 
 #action-text {
 	width: 222px;
-	top: 11px;
+	top: 9px;
 	left: 13px;
 }
 
