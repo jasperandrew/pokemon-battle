@@ -101,15 +101,12 @@ var playerTurn = {
       move = moveList[playerPkmn.moves[this.attributes["value"]["value"]]];
       buttonbox.classList.add("hide");
       box.innerHTML = playerPkmn.name + " used " + move.name + "!";
-      for(var i = 0; i < 4; i++){
-        buttons[i].removeEventListener("click", buttonClick); // Remove event listeners to prevent multi-clicks //
-      }
       setTimeout(attack, 1000, move);
     }
 
     // Add event listeners //
     for(var i = 0; i < 4; i++){
-      buttons[i].addEventListener("click", buttonClick);
+      buttons[i].onclick = buttonClick;
     }
   }
 };
