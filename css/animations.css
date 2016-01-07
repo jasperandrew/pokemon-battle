@@ -1,0 +1,38 @@
+.player-atk {
+  animation: .1s linear 0s 2 alternate none running player-atk;
+}
+
+.cpu-atk {
+  animation: .1s linear 0s 2 alternate none running cpu-atk;
+}
+
+.atk-flash {
+  animation: .1s linear 0s 10 alternate none running atk-flash;
+}
+
+@keyframes player-atk {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(10px);
+  }
+}
+
+@keyframes cpu-atk {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-10px);
+  }
+}
+
+@keyframes atk-flash {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

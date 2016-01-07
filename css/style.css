@@ -20,6 +20,11 @@ html, body {
 
 #top-screen, #bottom-screen {
 	position: relative;
+	margin: 0 auto;
+	height: 190px;
+	width: 256px;
+	border: 2px solid #292929;
+	border-radius: 2px;
 }
 
 #player, #player-name, #player-health-bar, #player-info, #player-lvl,
@@ -42,20 +47,10 @@ html, body {
 
 #top-screen {
 	top: 40px;
-	margin: 0 auto;
-	height: 190px;
-	width: 256px;
-	border: 2px solid #292929;
-	border-radius: 2px;
 }
 
 #bottom-screen {
 	top: 138px;
-	margin: 0 auto;
-	height: 190px;
-	width: 256px;
-	border: 2px solid #292929;
-	border-radius: 2px;
 }
 
 #top-screen img {
@@ -81,6 +76,7 @@ html, body {
 #player-health {
 	width: 100%;
 	height: 4px;
+	transition: all .2s;
 }
 
 #player-name {
@@ -112,6 +108,7 @@ html, body {
 #cpu-health {
 	width: 100%;
 	height: 4px;
+	transition: all .2s;
 }
 
 #cpu-name {
